@@ -76,7 +76,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_btn"
                 android:padding="8dp"
-                android:text="@string/create_account"
+                android:text="@string/login"
                 android:textColor="#ffffff" />
 
         </LinearLayout>

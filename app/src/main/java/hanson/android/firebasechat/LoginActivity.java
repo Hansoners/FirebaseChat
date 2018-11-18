@@ -2,10 +2,10 @@ package hanson.android.firebasechat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mLoginEmail.getEditText().getText().toString().trim();
-                String password = mLoginPassword.getEditText().getText().toString();
+                String email = Objects.requireNonNull(mLoginEmail.getEditText()).getText().toString().trim();
+                String password = Objects.requireNonNull(mLoginPassword.getEditText()).getText().toString();
                 mLoginProgress.setTitle("Logging in");
                 mLoginProgress.setCanceledOnTouchOutside(false);
                 mLoginProgress.show();
@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                             mLoginProgress.dismiss();
 
                             Intent main_intent = new Intent(LoginActivity.this, MainActivity.class);
+                            main_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(main_intent);
                             finish();
 
