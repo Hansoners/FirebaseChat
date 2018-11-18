@@ -13,6 +13,8 @@ public class StartActivity extends AppCompatActivity {
 
     @BindView(R.id.reg_btn)
     Button reg_btn;
+    @BindView(R.id.start_login)
+    Button login_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,14 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent reg_intent = new Intent(StartActivity.this, RegisterActivity.class);
                 startActivity(reg_intent);
+            }
+        });
+
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent login_intent = new Intent(StartActivity.this, LoginActivity.class);
+                startActivity(login_intent);
             }
         });
     }
