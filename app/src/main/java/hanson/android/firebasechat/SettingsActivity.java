@@ -1,9 +1,11 @@
 package hanson.android.firebasechat;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.UCrop.Options;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -88,7 +94,41 @@ public class SettingsActivity extends AppCompatActivity {
                 gallery_intent.setType("image/*");
                 gallery_intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(gallery_intent, "Select Image"), GALLERY_PIC);
+
             }
         });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == GALLERY_PIC) {
+            Uri imageUri = data.getData();
+
+            assert imageUri != null;
+            String destinationFileName = "Cropped Image";
+            Uri destinationUri = Uri.fromFile(new File(getCacheDir(), destinationFileName));
+
+
+            UCrop.Options options = new UCrop.Options();
+            options.setToolbarColor(this.getResources().getColor(R.color.colorPrimary));
+            options.setActiveWidgetColor(ContextCompat.getColor(this, R.color.colorAccent));
+            options.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+            options.setRootViewBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryLight));
+
+            UCrop.of(imageUri, destinationUri)
+                    .withAspectRatio(1, 1)
+                    .withOptions(options)
+                    .withMaxResultSize(1000, 1000)
+                    .start(this);
+
+
+
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+        }
+    }
+
+
+
+
 }
