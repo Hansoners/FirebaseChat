@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/white_gradient"
     tools:context=".StartActivity">
 
     <LinearLayout
@@ -37,7 +38,7 @@
         android:layout_gravity="center"
         android:background="@drawable/rounded_btn"
         android:text="@string/login"
-        android:textColor="#ffffff"
+        android:textColor="@color/textPrimary"
         />
 
     <Button
@@ -48,7 +49,7 @@
         android:layout_gravity="center"
         android:background="@drawable/rounded_btn"
         android:text="@string/register"
-        android:textColor="#ffffff"
+        android:textColor="@color/textPrimary"
         />
 
     </LinearLayout>

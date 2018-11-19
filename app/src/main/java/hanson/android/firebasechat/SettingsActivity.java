@@ -2,6 +2,7 @@ package hanson.android.firebasechat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -51,6 +53,8 @@ public class SettingsActivity extends AppCompatActivity {
     Button mStatusBtn;
     @BindView(R.id.profile_image_btn)
     Button mImageBtn;
+    @BindView(R.id.profile_toolbar)
+    Toolbar mToolbar;
 
     FirebaseUser mCurrentUser;
     private static final int GALLERY_PIC = 1;
@@ -64,6 +68,11 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
         mImageStorage = FirebaseStorage.getInstance().getReference();
+        setSupportActionBar(mToolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(null);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Profile");
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,9 +91,12 @@ public class SettingsActivity extends AppCompatActivity {
 
                 mName.setText(name);
                 mStatus.setText(status);
-                Picasso.get()
-                        .load(image)
-                        .into(mProfileImage);
+
+                if (!(image.equals("default"))) {
+                    Picasso.get()
+                            .load(image)
+                            .into(mProfileImage);
+                }
 
             }
 
@@ -160,7 +172,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 mProgressDialog.dismiss();
                             }
                         });
-
 
 
                     } else {

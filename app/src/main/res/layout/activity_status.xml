@@ -41,7 +41,7 @@
         android:background="@drawable/rounded_btn"
         android:padding="8dp"
         android:text="@string/save"
-        android:textColor="#ffffff" />
+        android:textColor="@color/textPrimary"  />
 
 
 </RelativeLayout>

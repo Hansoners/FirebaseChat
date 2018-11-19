@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/gradient"
     android:padding="15dp"
     tools:context=".RegisterActivity">
 
@@ -94,7 +94,7 @@
                 android:background="@drawable/rounded_btn"
                 android:padding="8dp"
                 android:text="@string/create_account"
-                android:textColor="#ffffff" />
+                android:textColor="@color/textPrimary" />
 
         </LinearLayout>
 

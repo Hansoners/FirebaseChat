@@ -47,6 +47,7 @@ public class StatusActivity extends AppCompatActivity {
         String cur_uid = mCurrentUser.getUid();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(cur_uid);
         setSupportActionBar(mStatusBar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Change Status");
         Objects.requireNonNull(mStatusDescription.getEditText()).setText(current_status);
 
@@ -62,6 +63,7 @@ public class StatusActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             mProgressDialog.dismiss();
+                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "Error. Changes not saved.", Toast.LENGTH_SHORT).show();
                         }
