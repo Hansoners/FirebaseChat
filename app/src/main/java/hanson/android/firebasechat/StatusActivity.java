@@ -32,7 +32,7 @@ public class StatusActivity extends AppCompatActivity {
     TextInputLayout mStatusDescription;
 
     private DatabaseReference myRef;
-
+    String current_status;
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -41,13 +41,14 @@ public class StatusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_status);
 
         ButterKnife.bind(this);
-
+        current_status = getIntent().getStringExtra("status");
         FirebaseUser mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         assert mCurrentUser != null;
         String cur_uid = mCurrentUser.getUid();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(cur_uid);
         setSupportActionBar(mStatusBar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Change Status");
+        Objects.requireNonNull(mStatusDescription.getEditText()).setText(current_status);
 
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
