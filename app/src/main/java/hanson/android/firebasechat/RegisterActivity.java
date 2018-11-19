@@ -18,7 +18,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -37,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ProgressDialog mRegProgress;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +81,30 @@ public class RegisterActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            mRegProgress.dismiss();
-                            Intent main_intent = new Intent(RegisterActivity.this, MainActivity.class);
-                            main_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(main_intent);
-                            finish();
+                            assert user != null;
+                            String uid = user.getUid();
+
+                            mDatabase = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = mDatabase.getReference().child("Users").child(uid);
+                            HashMap<String, String> userInfo = new HashMap<>();
+                            userInfo.put("name", display_name);
+                            userInfo.put("status", "Hi there! I am using FlatChat.");
+                            userInfo.put("image", "default");
+                            userInfo.put("thumbnail", "default");
+
+                            myRef.setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        mRegProgress.dismiss();
+                                        Intent main_intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        main_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(main_intent);
+                                        finish();
+
+                                    }
+                                }
+                            });
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -90,8 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Registration failed. Please try again.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
-                        // ...
                     }
                 });
     }

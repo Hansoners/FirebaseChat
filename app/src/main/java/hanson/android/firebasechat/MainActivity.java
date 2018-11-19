@@ -75,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 toStart();
                 break;
+            case R.id.main_settings:
+                Intent settings_intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settings_intent);
+                break;
         }
 
         return true;
