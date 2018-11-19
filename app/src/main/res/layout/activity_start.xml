@@ -4,53 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/white_gradient"
+    android:background="@drawable/new_gradient"
     tools:context=".StartActivity">
 
     <LinearLayout
-        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/texticon" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Welcome to FlatChat!"
-        android:layout_margin="25dp"
-        android:textSize="24sp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/texticonwhite" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:text="Welcome to FlatChat!"
+            android:textColor="@color/textPrimary"
+            android:textSize="24sp" />
 
 
-    <Button
-        android:id="@+id/start_login"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginEnd="23dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_btn"
-        android:text="@string/login"
-        android:textColor="@color/textPrimary"
-        />
+        <Button
+            android:id="@+id/start_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="23dp"
+            android:background="@drawable/rounded_btn"
+            android:text="@string/login"
+            android:textColor="@color/textPrimary" />
 
-    <Button
-        android:id="@+id/reg_btn"
-        android:layout_margin="23dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_btn"
-        android:text="@string/register"
-        android:textColor="@color/textPrimary"
-        />
+        <Button
+            android:id="@+id/reg_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="23dp"
+            android:background="@drawable/rounded_btn"
+            android:text="@string/register"
+            android:textColor="@color/textPrimary" />
 
     </LinearLayout>
 

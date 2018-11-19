@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/gradient"
+    android:orientation="vertical"
     android:padding="15dp"
     tools:context=".RegisterActivity">
 
@@ -24,7 +24,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="25dp"
             android:orientation="vertical">
 
@@ -91,6 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/rounded_btn"
                 android:padding="8dp"
                 android:text="@string/create_account"
@@ -103,8 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:alpha="0.9"
-            android:textColor="#ffffff"
-            android:text="Made by HansonC" />
+            android:text="Made by HansonC"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </RelativeLayout>
